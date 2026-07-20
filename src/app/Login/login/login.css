@@ -1,0 +1,123 @@
+/* Fullscreen Kattegat Background */
+
+/* Dark Frost Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(10, 15, 20, 0.75), rgba(10, 10, 15, 0.75));
+  z-index: 1;
+}
+
+/* Frosted Glass Login Box */
+.login-box {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 40px;
+  width: 360px;
+  text-align: center;
+  color: #f8f8f8;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Title + Subtitle */
+.login-box h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  color: #e3e3e3;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.login-box p {
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: #ccc;
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #ffb800;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Button - Norse Gold */
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: linear-gradient(90deg, #b8860b, #daa520);
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #daa520, #ffd700);
+  transform: scale(1.03);
+}
+
+/* Responsive for Mobile */
+@media (max-width: 480px) {
+  .login-box {
+    width: 85%;
+    padding: 28px;
+  }
+  .login-box h2 {
+    font-size: 24px;
+  }
+}
+.login-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw; /* Full width viewport */
+  margin: 0;
+  padding: 0;
+  background-image: url('https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=1600&q=80'); /* Kattegat fjord */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/*----------------------------------------*/

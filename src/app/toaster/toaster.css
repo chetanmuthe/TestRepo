@@ -1,0 +1,16 @@
+.toaster {
+  position: fixed;
+  top: 20px;          /* moved to top */
+  right: -300px;      /* hidden off screen */
+  background: #333;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: right 0.5s ease; /* slide animation */
+}
+
+.toaster.show {
+  right: 20px; /* slide into screen */
+}

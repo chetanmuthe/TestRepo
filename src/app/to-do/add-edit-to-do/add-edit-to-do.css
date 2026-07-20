@@ -1,0 +1,24 @@
+.defaultMargin{
+  margin-left: 10px;
+}
+.checkboxWidth{
+  width: 31px;height: 31px;
+}
+.table td, 
+.table th {
+    border: 1px solid #000;
+    padding: 6px;
+    text-align: center;
+}
+.table thead{
+  background-color: #000;
+}
+
+.table {
+    border-collapse: collapse;
+}
+.font_mukta_medium{
+    font-size: 20px;
+    background-origin: padding-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

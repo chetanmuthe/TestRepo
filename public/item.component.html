@@ -1,0 +1,185 @@
+<div class="p-2 font_16 text_blue">
+  <span>Inventory / Item / <b>Item</b></span>
+</div>
+<app-master-filter [filter]="Filter" [AccessRights]="AccessRights" (resetClick)="Reset()" (searchClick)="Search($event)" (ExportClick)="ExportSRToExcel()" (addClick)="Add()" (ImportItemClick)="Import($event)" (ImportInventoryClick)="ImportInventory($event)"
+  (ImportLegacyItemClick)="ImportLegacyItem($event)" (ImportItemPriceClick)="ImportItemPrice($event)" (pageAuditClick)="PageAuditTrail()">
+  <div class="d-flex form-group flex-wrap" filter>
+    <!-- <div class="col-lg-5 col-sm-6 col-xs-12">Item Name:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2 hsn-search">
+      <dropdown-search [dataList]="dataListSearch" (itemSelected)="customerSelected($event)" [placeholder]="placeholder"
+      class="w-100"></dropdown-search>
+    </div> -->
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Item Code:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <input type="text" class="form-control" [(ngModel)]="ItemSearchModelObj.CODE" />
+    </div>
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Item Name:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <input type="text" class="form-control" [(ngModel)]="ItemSearchModelObj.NAME" />
+    </div>
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Brand:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <select class="form-select" [(ngModel)]="ItemSearchModelObj.BRAND_ID" name="Id">
+        <option value="0"> All </option>
+        @for (item of BrandList; track item) {
+          <option  value={{item.Id}}>
+            {{item.Name}}
+          </option>
+        }
+      </select>
+    </div>
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">ItemCategory:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <select class="form-select" [(ngModel)]="ItemSearchModelObj.ITEM_CATEGORY_ID" name="Id" (change)="GetItemSubCategoryByCategoryList()">
+        <option value="0"> All </option>
+        @for (item of ItemCategoryList; track item) {
+          <option  value={{item.Id}}>
+            {{item.Name}}
+          </option>
+        }
+      </select>
+    </div>
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">ItemSubCategory:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <select class="form-select" [(ngModel)]="ItemSearchModelObj.ITEM_SUBCATEGORY_ID" name="Id" >
+        <option value="0"> All </option>
+        @for (item of ItemSubCategoryList; track item) {
+          <option  value={{item.Id}}>
+            {{item.Name}}
+          </option>
+        }
+      </select>
+    </div>
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Status:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <select class="form-select" [(ngModel)]="ItemSearchModelObj.ACTIVE" name="Id">
+        <option value=""> All </option>
+        <option [value]="true"> Active </option>
+        <option [value]="false" > Inactive </option>
+      </select>
+    </div>
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">HSN Code:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <dropdown-search
+        [dataList]="dataListHSNCodeSearch"
+        (itemSelected)="HSNCodeSelected($event)"
+        [placeholder]="custplaceholder"
+        (searchDate)="fromdropdownserachforHSNCodeNo($event)"
+        [NoRecordFound]="NoRecordFoundForHSNCodeNo"
+        [selectedValue]="selectedHSNCodeNo.Name"
+        [ResetModelValue]="ResetModel"
+        class="w-100">
+      </dropdown-search>
+    </div>
+
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Inventory Remark:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <select class="form-select" [(ngModel)]="ItemSearchModelObj.IsInventoryRemark" >
+        <option value=""> All </option>
+        <option [value]="1"> Available </option>
+        <option [value]="0" >Not Available </option>
+      </select>
+    </div>
+	@if(IsPsgFlow == true)
+	{
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Is Serialized Inventory:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <select class="form-select" [(ngModel)]="ItemSearchModelObj.IsSerializedInventory" >
+        <option value=""> All </option>
+        <option [value]="true"> Yes </option>
+        <option [value]="false" >No </option>
+      </select>
+    </div>
+  }
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Item Class:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <ng-multiselect-dropdown [placeholder]="'Select Class'"
+        [settings]="dropdownSettings" [data]="ItemClassDropdownList" [(ngModel)]="ItemSearchModelObj.ItemClassId"
+        ></ng-multiselect-dropdown>
+    </div>
+
+    <div class="col-lg-5 col-sm-6 col-xs-12 font_mukta_medium">Item Calibre:</div>
+    <div class="col-lg-7 col-sm-6 col-xs-12 pb-2">
+      <ng-multiselect-dropdown [placeholder]="'Select Calibre'"
+        [settings]="CalibredropdownSettings" [data]="ItemCalibreDropdownList" [(ngModel)]="ItemSearchModelObj.ItemCalibreId"
+        ></ng-multiselect-dropdown>
+    </div>
+
+  </div>
+
+  <div class="col-lg-12 list-group" listing>
+    @for (item of dataList | paginate: { id:'masterFilterPaginationId', itemsPerPage: Filter.PageSize, currentPage: Filter.PageNumber,totalItems: TotalRecord  }; track item; let i = $index) {
+      <div class="col-lg-12 list-group-item" (click)="Edit(item);select(i)" [ngClass]="{'bg_selected':i === IsListItemSelected,'InventoryRemarkAvailableRow':item.IsInventoryRemarkAvailable==true}"
+        >
+        <div class="d-flex justify-content-between align-items-baseline">
+          <span class="code-section"><span class="font_mukta_medium">Item Code:</span>&nbsp;<span>{{item.ItemCode}}</span></span>
+          <div class="d-flex align-items-center action-section">
+            <!-- <span class="fa fa-pencil pl-2 cursor-pointer" (click)="Edit(item,false)" title="Edit"
+          *ngIf="AccessRights.Item_Details"></span>
+          <span class="fa fa-eye pl-2 cursor-pointer" title="View" (click)="Edit(item,true)"></span> -->
+          @if (AccessRights.Item_Details) {
+            <span class="fa fa-trash pl-2 cursor-pointer" (click)="$event.stopPropagation();Delete(item)" title="Delete"
+            ></span>
+          }
+          <span style="font-size: 16px;margin-top: 4px;" class="fa fa-list pl-2 cursor-pointer"
+          (click)="$event.stopPropagation();GetAuditrail(item)" title="Audit Trail"></span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="code-section word-break"><span class="font_mukta_medium">Name:</span>&nbsp;<span>{{item.ItemName}}</span></span>
+        <div class="d-flex align-items-center action-section">
+          <label class="switch mb-0">
+            <input type="checkbox" [(ngModel)]="item.IsActive" disabled>
+            <span class="slider cursor-default" title="{{item.IsActive?'Active':'Inactive'}}"></span>
+          </label>
+        </div>
+      </div>
+      <!-- <div class="word-break">
+      Item Name.:&nbsp;<span>{{item.ItemName}}</span>
+    </div> -->
+  </div>
+}
+</div>
+</app-master-filter>
+@if (showAddEditComponent==true) {
+  <div>
+    <app-add-edit-item [ItemId]="selectedItem.ItemId" [Filter]="Filter" (onSaveSuccess)="fromChildCallback($event)" [IsAddPage]="IsAddPage">
+    </app-add-edit-item>
+  </div>
+}
+@if (AuditModel.showAuditTrailComponent==true) {
+  <div>
+    <app-audit-trail [auditModel]="AuditModel" (onSaveSuccess)="audittrailCallback($event)">
+    </app-audit-trail>
+  </div>
+}
+@if (showImportFileComponent==true) {
+  <div>
+    <app-import-file [ImportCode]="ImportCode"
+      [ImportName]="ImportName"
+      (onSaveSuccess)="fromChildCallbackImport($event)">
+    </app-import-file>
+  </div>
+}
+@if (showImportInventoryComponent==true) {
+  <div>
+    <app-import-file [ImportCode]="ImportCodeInventory"
+      [ImportName]="ImportNameInventory"
+      (onSaveSuccess)="fromChildCallbackImport($event)">
+    </app-import-file>
+  </div>
+}
+<!-- <div *ngIf="showImportLegacyItemComponent==true">
+<app-import-file [ImportCode]="ImportItemLegacy"
+  [ImportName]="ImportItemLegacyName"
+  (onSaveSuccess)="fromChildCallbackImport($event)">
+</app-import-file>
+</div> -->
+@if (showImportItemPriceComponent==true) {
+  <div>
+    <app-import-file [ImportCode]="ImportPriceItem"
+      [ImportName]="ImportNameItemPrice"
+      (onSaveSuccess)="fromChildCallbackImport($event)">
+    </app-import-file>
+  </div>
+}

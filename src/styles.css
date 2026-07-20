@@ -1,0 +1,74 @@
+.Main-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1b1b1b 0%, #242526 100%);
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffb800;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #ffb800;
+}
+
+/* Dashboard content */
+.content {
+  text-align: center;
+  padding: 100px 20px;
+}
+.MainContent {
+  padding: 5px 5px;
+}
+
+.content h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.content p {
+  color: #aaa;
+}
+
+.buttonPrimeColor{
+background: rgba(0, 0, 0, 0.8);
+}
+.PrimMainColor{
+  color: #fff;
+}
+.mainContaint{
+background: rgba(0, 0, 0, 0.8);
+color: white;
+}
+.boldFont{
+  
+}

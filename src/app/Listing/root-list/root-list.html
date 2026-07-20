@@ -1,0 +1,91 @@
+<div class="Brand">
+  <div class="rlxpgStyle">
+    <div class="leftSidebarBtnOpen mx-0 py-3 " (click)="Filter.IsOpen=!Filter.IsOpen"
+      (mouseover)="Filter.IsOver=true" (mouseleave)="Filter.IsOver=false"
+      [ngClass]="{'is_Close':Filter.IsOpen === true}">
+      <div class="d-flex justify-content-center card card_height position-relative">
+        <div class="slider_button d-flex justify-content-center align-items-center">
+          <a><i class="fa text_blue"
+          [ngClass]="{ 'fa-caret-left' : Filter.IsOpen === true,'fa-caret-right': Filter.IsOpen === false}"></i></a>
+        </div>
+        @if (Filter.IsOver===true && Filter.IsOpen === true) {
+          <span class="open_close_tag cursor-pointer" style="color: white;"
+          (mouseover)="Filter.IsOpen=true">Close</span>
+        }
+        @if (Filter.IsOpen === false && Filter.IsOver===true) {
+          <span class="open_close_tag cursor-pointer" style="color: white;"
+          (mouseover)="Filter.IsOpen=false">Open</span>
+        }
+      </div>
+    </div>
+
+    <div class="card-deck search mx-0">
+      <div class="filter_list_card" [ngClass]="{'slide_class':Filter.IsOpen === false}">
+
+        <div class="card filter p-1">
+
+          <div class="card-title filter_title_style mb-0">
+            <div style="width:55%;text-align:right;">
+              <span>Filter</span>
+            </div>
+            <div style="width:45%;text-align:right;">
+              <button type="button" class="text_blue filter_btn_bg rounded-circle border-0 mr-2" (click)="onReset()" title="Reset"><i class="fa fa-undo mt-1"></i></button>
+            </div>
+          </div>
+
+          <div class="card-body p-2 mainContaint overflow-auto position-relative" style="height: 72vh;">
+            <ng-content select="[filter]"></ng-content>
+            
+          </div>
+          <div class="d-flex form-group justify-content-end pt-1" style="height: 34px;">
+
+            <!-- <button type="button" class="btn_gold mr-2" *ngIf="Filter.ShowExportToExcel" (click)="ExportFile();"  title="Export to Excel"><i class="fa fa-file-excel-o"></i></button> -->
+            <!--Reset All Filter only for Inquiry-->
+            @if (ShowResetAllButton==true) {
+              <button type="button" class="btn_blue_outline" (click)="ResetAll()">Reset All</button>
+            }
+            <!--Reset All End-->
+            <button type="button" class="ml-2 btn_blue_outline" (click)="onSearch()">Search</button>
+            <!-- <button type="button" class="btn_refresh" (click)="onReset()" title="Refresh"><i class="fa fa-refresh"></i></button> -->
+          </div>
+        </div>
+
+        <div class="card list p-1">
+          <div class="card-title list_title_style">
+            <div style="width:55%;text-align:right;">
+              <span class="mb-0 ml-5">List
+                @if (Filter.TotalRecords > 0) {
+                  <span> ({{Filter.TotalRecords}})</span>
+                } 
+              </span>
+            </div>
+            <div style="width:45%;text-align:right;margin-right: 7px;">
+              @if (Filter.IsShowAddNew) {
+                <button type="button" class="border-0 filter_btn_bg rounded-pill mr-2 px-1"
+                  (click)="onAdd();Filter.IsOpen=!Filter.IsOpen" title="Add New">
+                  <!-- <span><i class="fa fa-plus font_15 px-1"></i></span> -->
+                   Add New
+                </button>
+              }
+              <button type="button" class="border-0 filter_btn_bg rounded-pill"
+                (click)="onPageAuditClick();" title="Audit Trail">
+                <span><i class="fa fa-list-alt font_15"></i></span>
+              </button>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <!--Header-->
+          <div class="card-body p-0 bg-white card_list_height">
+            <div class="card_list h-100">
+              <ng-content select=[listing]></ng-content>
+            </div>
+
+          </div>
+          <!-- <pagination-controls id="masterFilterPaginationId" (pageChange)="onPageClick($event)" class="text-center"></pagination-controls> -->
+          <!--Card body-->
+        </div>
+        <!--card List-->
+      </div>
+    </div>
+  </div>
+</div>

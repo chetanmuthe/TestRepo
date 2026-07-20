@@ -1,0 +1,127 @@
+<div class="m-3">
+    <div class="title">
+        {{ToDoId>0?'Edit ':'Add '}}To Do
+    </div>
+    <div class="modal-body" style="margin-top: 20px;" [formGroup]="masterForm">
+        <div class="d-flex flex-wrap">
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">To Do Name<span class="mandatory">*</span>:</p>
+                <input type="text" class="form-control" formControlName="ToDoName">
+            </div>
+            <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">Work Category<span class="mandatory">*</span>:</p>
+                <select class="form-select" name="Id">
+                    <option value=""> All </option>
+                    <option [value]="true"> Active </option>
+                    <option [value]="false" selected> Inactive </option>
+                </select>
+            </div>
+            <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">Active<span class="mandatory">*</span>:</p>
+                <input type="checkbox" class="checkboxWidth" formControlName="Active">
+            </div>
+            <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">Created Date<span class="mandatory">*</span>:</p>
+                <span>{{masterForm.value.CretedDate}}</span>
+            </div>
+            <br>
+        </div>
+        <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+            <button style="margin-top: 5px;width:120px ;height: 50px;" type="button"
+                class="border-0 filter_btn_bg rounded-pill mr-2 px-1" (click)="AddUpdateToDo()">
+                Save
+            </button>
+        </div>
+
+        <!--Sub task form array-->
+        <!-- <form [formGroup]="masterForm" (click)="onSubmit()"> -->
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td class="font_mukta_medium">
+                            Name
+                        </td>
+                        <td class="font_mukta_medium">
+                            Description
+                        </td>
+                        <td class="font_mukta_medium">
+                            Done?
+                        </td>
+                        <td class="font_mukta_medium">
+                            Status
+                        </td>
+                        <td class="font_mukta_medium">
+                            Completed Date
+                        </td>
+                        <td class="font_mukta_medium">
+                            Action
+                        </td>
+                    </tr>
+                </thead>
+                <tbody formArrayName="SubTasks">
+                    <tr *ngFor="let task of SubTasks.controls; let i = index" [formGroupName]="i" class="task-item">
+                        <td>
+                            <div>
+                                <input formControlName="name" class="form-control" placeholder="Sub task name" />
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <textarea formControlName="description" class="form-control"
+                                    placeholder="Sub task description"></textarea>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <label>
+                                    <input type="checkbox" class="checkboxWidth" formControlName="done" />
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <select formControlName="status" class="form-select">
+                                    <option value="">-- Select --</option>
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div>
+                                <input type="date" formControlName="completedDate" class="form-control" />
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+
+                                <button style="margin-top: 5px;width:55px ;height: 30px;" type="button"
+                                    class="border-0 filter_btn_bg rounded-pill mr-2 px-1" 
+                                    (click)="SaveSubTask(task)">
+                                    Save
+                                </button>
+                                <button style="margin-top: 5px;width:55px ;height: 30px;" type="button"
+                                    class="border-0 filter_btn_bg rounded-pill mr-2 px-1" (click)="DeleteSubTask(i)">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <button style="margin-top: 5px;width:120px ;height: 50px;" type="button"
+                    class="border-0 filter_btn_bg rounded-pill mr-2 px-1" (click)="addTask()">
+                    Add Subtask
+                </button>
+            </div>
+            <br /><br />
+        </div>
+        <!--Sub tack form array end-->
+    </div>
+</div>
+<app-toaster></app-toaster>

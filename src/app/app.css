@@ -1,0 +1,77 @@
+
+/* Snow wrapper: sits on top, non-interactive */
+.snow-wrapper {
+  position: fixed;
+  inset: 0;                /* top:0; right:0; bottom:0; left:0 */
+  pointer-events: none;    /* allow clicks through */
+  z-index: 999;            /* adjust if necessary */
+  overflow: hidden;
+}
+
+/* Each snowflake wrapper controls horizontal sway (left) */
+.snowflake {
+  position: absolute;
+  top: -10vh;              /* start slightly above viewport */
+  left: var(--left, 50%);
+  transform: translateX(0);
+  animation: sway var(--dur, 10s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Inner flake moves vertically */
+.snowflake .flake {
+  font-size: var(--size, 14px);
+  opacity: var(--opacity, 0.85);
+  color: rgba(255,255,255,0.95);
+  transform: translateY(-10vh);
+  display: inline-block;
+  will-change: transform, opacity;
+  animation: fall var(--dur, 10s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Vertical fall (translateY from above to below) */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) scale(0.95);
+    opacity: 0.85;
+  }
+}
+
+/* Horizontal gentle sway (left-right) */
+@keyframes sway {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(20px); }
+  50%  { transform: translateX(0); }
+  75%  { transform: translateX(-20px); }
+  100% { transform: translateX(0); }
+}
+
+/* Small performance tweak for mobile */
+@media (max-width: 480px) {
+  .snow-wrapper { z-index: 100; } /* ensure not far above UI */
+}
+
+/* Respect user preference to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .snowflake,
+  .snowflake .flake {
+    animation: none !important;
+    opacity: 0.7;
+  }
+}
+
+.defaultMargin{
+  margin-left: 10px;
+}
+.checkboxWidth{
+  width: 31px;height: 31px;
+}

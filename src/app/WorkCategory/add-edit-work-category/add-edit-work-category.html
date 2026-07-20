@@ -1,0 +1,31 @@
+<div class="m-3">
+    <div class="title">
+        {{CategoryId>0?'Edit ':'Add '}}Work Category
+    </div>
+    <div class="modal-body" style="margin-top: 20px;">
+        <div class="d-flex flex-wrap" [formGroup]="masterForm">
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">Work Category Code<span class="mandatory">*</span>:</p>
+                <input type="text" class="form-control" formControlName="WorkCategoryCode">
+            </div>
+            <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">Work Category Name<span class="mandatory">*</span>:</p>
+                <input type="text" class="form-control" formControlName="WorkCategoryName">
+            </div>
+            <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">Active<span class="mandatory">*</span>:</p>
+                <input type="checkbox" class="checkboxWidth" formControlName="Active">
+            </div>
+            <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <p class="font_mukta_medium">Created Date<span class="mandatory">*</span>:</p>
+                <span>{{masterForm.value.CretedDate}}</span>
+            </div>
+            <br>
+        </div>
+            <div class="defaultMargin form-group col-xs-12 col-sm-12 col-md-4 col-lg-3 mb-2 px-md-3 px-lg-0">
+                <button style="margin-top: 5px;width:120px ;height: 50px;" type="button" class="border-0 filter_btn_bg rounded-pill mr-2 px-1" (click)="AddUpdateWorkCategory()">
+                    Save
+                </button>
+            </div>
+    </div>
+</div>
